@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Countdown Clock</title>
+<link rel="stylesheet" href="style.css">
+</head>
+
+</head>
+<body>
+  <h1>This amazing Juniper will only be around for another</h1>
+
+<div id="clockdiv">
+  <div>
+    <span class="days"></span>
+    <div class="smalltext">Days</div>
+  </div>
+  <div>
+    <span class="hours"></span>
+    <div class="smalltext">Hours</div>
+  </div>
+  <div>
+    <span class="minutes"></span>
+    <div class="smalltext">Minutes</div>
+  </div>
+  <div>
+    <span class="seconds"></span>
+    <div class="smalltext">Seconds</div>
+  </div>
+</div>
+
+<!-- Calendar for setting a new date -->
+<input type="date" id="newDate">
+<button onclick="setNewDate()">Set New Date</button>
+
+<script>
+// Set the date we're counting down to
+var countDownDate = new Date("Mar 4, 2024 00:00:00").getTime();
+
+// Update the count down every 1 second
+var x = setInterval(function() {
+
+  // Get today's date and time
+  var now = new Date().getTime();
+
+  // Find the distance between now and the count down date
+  var distance = countDownDate - now;
+
+  // Time calculations for days, hours, minutes and seconds
+  var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+  var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+  var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+  // Display the result in the element with id="clockdiv"
+  document.getElementById("clockdiv").innerHTML = days + "d " + hours + "h "
+  + minutes + "m " + seconds + "s ";
+
+  // If the count down is finished, write some text
+  if (distance < 0) {
+    clearInterval(x);
+    document.getElementById("clockdiv").innerHTML = "EXPIRED";
+  }
+}, 1000);
+
+// Function to set a new date using the calendar
+function setNewDate() {
+  // Get the new date from the calendar
+  var newDate = document.getElementById("newDate").value;
+
+  // Convert the new date to a timestamp
+  countDownDate = new Date(newDate).getTime();
+}
+</script>
+
+</body>
+</html>
